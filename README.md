@@ -101,6 +101,7 @@ In your command terminal from the root directory:
 Check out a new branch.
 
 touch aws-windows-deployment-manifest.json and add the following code:
+```
 {
     "manifestVersion": 1,
     "deployments": {
@@ -115,9 +116,11 @@ touch aws-windows-deployment-manifest.json and add the following code:
         ]
     }
 }
+```
 
 touch a buildspec.yml and add the following code:
 
+```
 version: 0.2
 
 phases:
@@ -131,5 +134,6 @@ commands:
   files:
     - YOURAPPFOLDER/site/**/*
     - YOURAPPFOLDER/aws-windows-deployment-manifest.json
+```
 
 APP and Merge to Master
