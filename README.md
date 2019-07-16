@@ -95,3 +95,41 @@ Confirm skip
 ##Step 18: Click "next" to review settings
 
 Click "create pipeline".
+
+In your command terminal from the root directory:
+
+Check out a new branch.
+
+touch aws-windows-deployment-manifest.json and add the following code:
+{
+    "manifestVersion": 1,
+    "deployments": {
+        "aspNetCoreWeb": [{
+                "name": "YOURAPPNAMEHERE",
+                "parameters": {
+                    "appBundle": "./site",
+                    "iisPath": "/",
+                    "iisWebSite": "Default Web Site"
+                }
+            }
+        ]
+    }
+}
+
+touch a buildspec.yml and add the following code:
+
+version: 0.2
+
+phases:
+
+build:
+commands:
+  - dotnet restore YOURAPPFOLDER/YOURAPPNAME.csproj
+  - dotnet build YOURAPPFOLDER/YOURAPPNAME.csproj
+  - dotnet publish YOURAPPFOLDER/YOURAPPNAME.csproj -o site
+ artifacts:
+  files:
+    - YOURAPPFOLDER/site/**/*
+    - YOURAPPFOLDER/aws-windows-deployment-manifest.json
+
+APP and Merge to Master
